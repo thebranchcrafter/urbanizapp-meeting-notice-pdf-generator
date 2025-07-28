@@ -1,0 +1,597 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.4;
+    color: #2c3e50;
+    background-color: #fff;
+    font-size: 12px;
+}
+
+.container {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+/* Header styles */
+.header {
+    border-bottom: 2px solid #34495e;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.main-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.meeting-info {
+    text-align: center;
+    font-size: 10px;
+    color: #7f8c8d;
+}
+
+.meeting-id, .community-id, .meeting-date {
+    margin: 1px 0;
+}
+
+/* Section styles */
+.section-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 12px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #3498db;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* Legal notice section */
+.legal-notice {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ecf0f1 100%);
+    border-left: 3px solid #3498db;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.legal-text {
+    font-size: 11px;
+    line-height: 1.6;
+    text-align: justify;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.highlight {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Meeting details */
+.meeting-details {
+    margin-bottom: 20px;
+}
+
+.description-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ecf0f1 100%);
+    padding: 12px;
+    border-radius: 6px;
+    border-left: 3px solid #f39c12;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.description-section h3 {
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* Meeting points */
+.meeting-points-section {
+    margin-bottom: 20px;
+}
+
+.points-list {
+    margin-top: 15px;
+}
+
+.meeting-point {
+    display: flex;
+    margin-bottom: 18px;
+    padding: 12px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ecf0f1 100%);
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    border-left: 3px solid #9b59b6;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.point-number {
+    font-size: 15px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-right: 12px;
+    min-width: 25px;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.point-content {
+    flex: 1;
+}
+
+.point-title {
+    font-size: 13px;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.point-description {
+    margin-bottom: 10px;
+    color: #555;
+    line-height: 1.4;
+    font-size: 11px;
+}
+
+.point-documents {
+    margin-bottom: 10px;
+}
+
+.point-documents h5 {
+    font-size: 11px;
+    color: #2c3e50;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.voting-info {
+    margin-bottom: 10px;
+    padding: 8px;
+    background: linear-gradient(135deg, #ecf0f1 0%, #d5dbdb 100%);
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.voting-info h5 {
+    font-size: 11px;
+    color: #2c3e50;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.voting-options h6 {
+    font-size: 10px;
+    color: #2c3e50;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.options-list {
+    list-style: decimal;
+    margin-left: 15px;
+}
+
+.option-item {
+    margin-bottom: 2px;
+    font-size: 10px;
+}
+
+/* Documents section */
+.documents-section {
+    margin-bottom: 20px;
+}
+
+.documents-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.document-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    border-left: 3px solid #3498db;
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.document-item.small {
+    padding: 6px;
+    font-size: 10px;
+}
+
+.document-info {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.document-info h4, .document-info h6 {
+    color: #2c3e50;
+    margin-bottom: 2px;
+    font-weight: 600;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.document-info h4 {
+    font-size: 12px;
+}
+
+.document-info h6 {
+    font-size: 10px;
+}
+
+.document-meta {
+    font-size: 10px;
+    color: #7f8c8d;
+    white-space: nowrap;
+}
+
+.file-size, .file-type {
+    margin-right: 8px;
+}
+
+/* Document status badges - Normalized */
+.document-status {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+
+.attached-badge {
+    display: inline-block;
+    padding: 3px 6px;
+    background-color: #27ae60;
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.attached-badge.small {
+    padding: 3px 6px;
+    font-size: 10px;
+}
+
+/* Footer */
+.footer {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+
+.generated-info {
+    font-size: 10px;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* Page break */
+.page-break {
+    page-break-before: always;
+}
+
+/* Modern vote circles - Visual only */
+.vote-circle {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 1.5px solid #3498db;
+    background-color: #fff;
+    margin-right: 8px;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Voting Sheet Styles - Compact */
+.voting-sheet {
+    margin-top: 15px;
+}
+
+.voting-section {
+    margin-bottom: 15px;
+}
+
+.voting-point {
+    margin-bottom: 15px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    page-break-inside: avoid;
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.point-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px;
+}
+
+.point-header .point-number {
+    font-size: 13px;
+    font-weight: 700;
+    margin-right: 10px;
+    min-width: 20px;
+    color: #2c3e50;
+}
+
+.point-header .point-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.point-description {
+    margin-bottom: 8px;
+    color: #555;
+    line-height: 1.3;
+    font-size: 11px;
+}
+
+.voting-options {
+    margin: 8px 0;
+}
+
+.voting-options h5 {
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #2c3e50;
+}
+
+/* Modern voting options */
+.approval-voting, .multiple-choice-voting, .discussion-voting {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.vote-option {
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ecf0f1 100%);
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.vote-option:hover {
+    background: linear-gradient(135deg, #ecf0f1 0%, #d5dbdb 100%);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+}
+
+.vote-option label {
+    font-size: 11px;
+    font-weight: 500;
+    color: #2c3e50;
+    cursor: pointer;
+    flex: 1;
+}
+
+/* Approval voting - modern horizontal layout */
+.approval-voting {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.approval-voting .vote-option {
+    flex: 1;
+    text-align: center;
+    padding: 8px 4px;
+}
+
+.approval-voting .vote-option label {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.2px;
+}
+
+/* Multiple choice - modern list */
+.multiple-choice-voting .vote-option {
+    border-left: 2px solid #9b59b6;
+}
+
+.multiple-choice-voting .vote-option:hover {
+    border-left-color: #8e44ad;
+}
+
+/* Discussion - modern checkbox */
+.discussion-voting .vote-option {
+    border-left: 2px solid #f39c12;
+}
+
+.discussion-voting .vote-option:hover {
+    border-left-color: #e67e22;
+}
+
+/* Signature section - compact */
+.signature-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ecf0f1 100%);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    border: 1px solid #e9ecef;
+}
+
+.signature-section h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    position: relative;
+    padding-bottom: 6px;
+}
+
+.signature-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    border-radius: 1px;
+}
+
+.signature-container {
+    background: #fff;
+    border-radius: 6px;
+    padding: 15px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    border: 1px solid #e9ecef;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.signature-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.signature-field {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 0;
+}
+
+.signature-field label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #2c3e50;
+    min-width: 110px;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.signature-field .underline {
+    flex: 1;
+    border-bottom: 2px solid #34495e;
+    height: 18px;
+    margin-left: 8px;
+    background: #fff;
+    border-radius: 1px;
+    min-width: 180px;
+    position: relative;
+}
+
+.signature-field .underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    transition: width 0.3s ease;
+}
+
+.signature-field:hover .underline::after {
+    width: 100%;
+}
+
+.signature-space {
+    flex: 1;
+    height: 50px;
+    border: 2px dashed #3498db;
+    border-radius: 4px;
+    background: #fff;
+    margin-left: 8px;
+    min-width: 180px;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.signature-space:hover {
+    border-color: #2980b9;
+    box-shadow: 0 1px 4px rgba(52, 152, 219, 0.15);
+}
+
+.signature-space::before {
+    content: '✍';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: #bdc3c7;
+    opacity: 0.6;
+}
+
+.signature-space:hover::before {
+    color: #3498db;
+    opacity: 0.8;
+}
+
+/* Voting Sheet Header - Compact */
+.voting-sheet .header {
+    border-bottom: 2px solid #34495e;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ecf0f1 100%);
+    border-radius: 6px;
+    padding: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.voting-sheet .main-title {
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.voting-sheet .meeting-info {
+    font-size: 10px;
+}
+
+.voting-sheet .meeting-id {
+    margin: 0;
+} 
+
+ 

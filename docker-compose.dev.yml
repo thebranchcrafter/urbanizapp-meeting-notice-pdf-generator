@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+    pdf-generator-api:
+        build: .
+        ports:
+            - "8000:8000"
+        environment:
+            - PYTHONPATH=/app
+            - LOG_LEVEL=DEBUG
+            - PYTHONDONTWRITEBYTECODE=1
+            - PYTHONUNBUFFERED=1
+            - WATCHFILES_FORCE_POLLING=true
+        volumes:
+            # Montar solo los directorios que necesitan hot reload
+            - ./app:/app/app:delegated
+            - ./requirements.txt:/app/requirements.txt:ro
+            # Los templates y static están dentro de app/, así que se montan automáticamente
+            # Volumen para cache de Python (opcional, mejora rendimiento)
+            - python_cache:/app/__pycache__
+        restart: unless-stopped
+        healthcheck:
+            test:
+                [
+                    "CMD",
+                    "wget",
+                    "--no-verbose",
+                    "--tries=1",
+                    "--spider",
+                    "http://localhost:8000/health",
+                ]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 40s
+        # Configuración para desarrollo
+        stdin_open: true
+        tty: true
+
+volumes:
+    python_cache:

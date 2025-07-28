@@ -1,0 +1,111 @@
+{
+  "id": "meeting_001",
+  "community_id": "community_123",
+  "title": "Convocatoria de Junta General Ordinaria",
+  "meeting_type": "Junta General Ordinaria",
+  "date_time": 1704067200,
+  "location": "Salón de Actos de la Comunidad, Calle Mayor 123, Madrid",
+  "description": "Se convoca a todos los propietarios de la Comunidad de Propietarios 'Residencial Los Pinos' a la Junta General Ordinaria que se celebrará con el siguiente orden del día.",
+  "status": 1,
+  "documents": [
+    {
+      "id": "doc_001",
+      "name": "Acta de la Junta Anterior",
+      "signed_url": "https://example.com/acta_anterior.pdf",
+      "content_type": "application/pdf",
+      "size": 245760
+    },
+    {
+      "id": "doc_002",
+      "name": "Presupuesto Anual 2024",
+      "signed_url": "https://example.com/presupuesto_2024.pdf",
+      "content_type": "application/pdf",
+      "size": 512000
+    }
+  ],
+  "meeting_notice_file": {
+    "id": "notice_001",
+    "name": "Convocatoria Oficial",
+    "signed_url": "https://example.com/convocatoria.pdf",
+    "content_type": "application/pdf",
+    "size": 128000
+  },
+  "meeting_points": [
+    {
+      "id": "point_001",
+      "meeting_id": "meeting_001",
+      "title": "Aprobación del Acta de la Junta Anterior",
+      "description": "Lectura y aprobación del acta de la Junta General celebrada el 15 de diciembre de 2023.",
+      "documents": [],
+      "voting": {
+        "voteType": "approval",
+        "options": []
+      },
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    },
+    {
+      "id": "point_002",
+      "meeting_id": "meeting_001",
+      "title": "Aprobación del Presupuesto Anual 2024",
+      "description": "Presentación y aprobación del presupuesto anual para el ejercicio 2024, incluyendo las cuotas de comunidad.",
+      "documents": [
+        {
+          "id": "doc_003",
+          "name": "Detalle Presupuesto 2024",
+          "signed_url": "https://example.com/detalle_presupuesto.pdf",
+          "content_type": "application/pdf",
+          "size": 102400
+        }
+      ],
+      "voting": {
+        "voteType": "approval",
+        "options": []
+      },
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    },
+    {
+      "id": "point_003",
+      "meeting_id": "meeting_001",
+      "title": "Elección de Presidente de la Comunidad",
+      "description": "Proceso de elección del nuevo Presidente de la Comunidad para el período 2024-2025.",
+      "documents": [],
+      "voting": {
+        "voteType": "multiple_choice",
+        "options": [
+          {
+            "id": "option_001",
+            "option": "María García López",
+            "order": 1
+          },
+          {
+            "id": "option_002",
+            "option": "Carlos Rodríguez Martín",
+            "order": 2
+          },
+          {
+            "id": "option_003",
+            "option": "Ana Fernández Jiménez",
+            "order": 3
+          }
+        ]
+      },
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    },
+    {
+      "id": "point_004",
+      "meeting_id": "meeting_001",
+      "title": "Ruegos y Preguntas",
+      "description": "Turno de ruegos y preguntas de los propietarios sobre cualquier asunto de interés para la comunidad.",
+      "documents": [],
+      "voting": {
+        "voteType": "discussion",
+        "options": []
+      },
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2024-01-01T10:00:00Z"
+    }
+  ]
+} 

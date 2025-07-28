@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convocatoria de Reunión</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-section">
+                <h1 class="main-title">CONVOCATORIA DE REUNIÓN</h1>
+                <div class="meeting-info">
+                    <p class="meeting-id">ID: {{ meeting.id }}</p>
+                    <p class="community-id">Comunidad ID: {{ meeting.community_id }}</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Meeting Details -->
+        <section class="meeting-details">
+            <h2 class="section-title">{{ meeting.title }}</h2>
+            
+            <div class="legal-notice">
+                <p class="legal-text">
+                    <strong>A)</strong> De conformidad con lo establecido en el Art. 16.2 de la vigente Ley de Propiedad Horizontal, 
+                    se convoca <strong>{{ meeting.meeting_type|title }}</strong> en la C.P. <strong>{{ meeting.community_id }}</strong>, 
+                    que tendrá lugar el próximo día <strong class="highlight">{{ meeting.date_time }}</strong>, 
+                    {{ meeting.location_time }}, 
+                    en el <strong class="highlight">{{ meeting.location }}</strong>, 
+                    para tratar los siguientes puntos del orden del día:
+                </p>
+            </div>
+
+            <div class="description-section">
+                <h3>Descripción de la Reunión</h3>
+                <p>{{ meeting.description }}</p>
+            </div>
+        </section>
+
+        <!-- Page break for agenda -->
+        <div class="page-break"></div>
+
+        <!-- Meeting Points -->
+        {% if meeting.meeting_points %}
+        <section class="meeting-points-section">
+            <h3 class="section-title">ORDEN DEL DÍA</h3>
+            
+            <div class="points-list">
+                {% for point in meeting.meeting_points %}
+                <div class="meeting-point">
+                    <div class="point-number">{{ loop.index }}.</div>
+                    <div class="point-content">
+                        <h4 class="point-title">{{ point.title }}</h4>
+                        <p class="point-description">{{ point.description }}</p>
+                        
+                        <!-- Point Documents -->
+                        {% if point.documents %}
+                        <div class="point-documents">
+                            <h5>Documentos del punto:</h5>
+                            <div class="documents-list">
+                                {% for document in point.documents %}
+                                <div class="document-item small">
+                                    <div class="document-info">
+                                        <h6>{{ document.name }}</h6>
+                                        <p class="document-meta">
+                                            <span class="file-size">{{ format_file_size(document.size) }}</span>
+                                        </p>
+                                    </div>
+                                    <div class="document-status">
+                                        <span class="attached-badge small">Adjunto</span>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <!-- Voting Information -->
+                        <div class="voting-info">
+                            <h5>Tipo de Votación: {{ get_vote_type_text(point.voting.voteType) }}</h5>
+                            
+                            {% if point.voting.options %}
+                            <div class="voting-options">
+                                <h6>Opciones de votación:</h6>
+                                <ol class="options-list">
+                                    {% for option in point.voting.options %}
+                                    <li class="option-item">
+                                        <span class="option-text">{{ option.option }}</span>
+                                    </li>
+                                    {% endfor %}
+                                </ol>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Documents Section -->
+        {% if meeting.documents %}
+        <section class="documents-section">
+            <h3 class="section-title">DOCUMENTOS ADJUNTOS</h3>
+            <div class="documents-list">
+                {% for document in meeting.documents %}
+                <div class="document-item">
+                    <div class="document-info">
+                        <h4>{{ document.name }}</h4>
+                        <p class="document-meta">
+                            <span class="file-size">{{ format_file_size(document.size) }}</span>
+                            <span class="file-type">{{ document.content_type }}</span>
+                        </p>
+                    </div>
+                    <div class="document-status">
+                        <span class="attached-badge">Adjunto</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="generated-info">
+                Documento generado el {{ generated_at }}
+            </p>
+        </footer>
+    </div>
+
+    <!-- Voting Sheet - New Page -->
+    {% if meeting.meeting_points %}
+    <div class="page-break"></div>
+    
+    <div class="container voting-sheet">
+        <header class="header">
+            <h1 class="main-title">HOJA DE VOTACIÓN</h1>
+            <div class="meeting-info">
+                <p class="meeting-id">ID: {{ meeting.id }} | Comunidad: {{ meeting.community_id }} | Fecha: {{ meeting.date_time }}</p>
+            </div>
+        </header>
+
+        <section class="voting-section">
+            <h2 class="section-title">PUNTOS A VOTAR</h2>
+            
+            {% for point in meeting.meeting_points %}
+            <div class="voting-point">
+                <div class="point-header">
+                    <h3 class="point-number">{{ loop.index }}.</h3>
+                    <h4 class="point-title">{{ point.title }}</h4>
+                </div>
+                
+                <p class="point-description">{{ point.description }}</p>
+                
+                <div class="voting-options">
+                    <h5>Tipo: {{ get_vote_type_text(point.voting.voteType) }}</h5>
+                    
+                    {% if point.voting.voteType == "approval" %}
+                    <div class="approval-voting">
+                        <div class="vote-option">
+                            <span class="vote-circle" data-value="approve"></span>
+                            <label>APROBAR</label>
+                        </div>
+                        <div class="vote-option">
+                            <span class="vote-circle" data-value="reject"></span>
+                            <label>RECHAZAR</label>
+                        </div>
+                        <div class="vote-option">
+                            <span class="vote-circle" data-value="abstain"></span>
+                            <label>ABSTENERSE</label>
+                        </div>
+                    </div>
+                    
+                    {% elif point.voting.voteType == "multiple_choice" %}
+                    <div class="multiple-choice-voting">
+                        {% for option in point.voting.options %}
+                        <div class="vote-option">
+                            <span class="vote-circle" data-value="{{ option.id }}"></span>
+                            <label>{{ option.option }}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    {% elif point.voting.voteType == "discussion" %}
+                    <div class="discussion-voting">
+                        <div class="vote-option">
+                            <span class="vote-circle" data-value="discuss"></span>
+                            <label>REQUIERE DISCUSIÓN</label>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+
+        <!-- Signature section at the end -->
+        <section class="signature-section">
+            <h3>DATOS DEL PROPIETARIO</h3>
+            <div class="signature-container">
+                <div class="signature-fields">
+                    <div class="signature-field">
+                        <label>Nombre y Apellidos:</label>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="signature-field">
+                        <label>Número de Vivienda:</label>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="signature-field">
+                        <label>Fecha:</label>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="signature-field">
+                        <label>Firma:</label>
+                        <div class="signature-space"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p class="generated-info">
+                Hoja de votación generada el {{ generated_at }}
+            </p>
+        </footer>
+    </div>
+    {% endif %}
+</body>
+</html> 
