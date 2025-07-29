@@ -5,10 +5,9 @@ from enum import Enum
 
 
 class VoteType(str, Enum):
-    APPROVAL = "approval"
-    MULTIPLE_CHOICE = "multiple_choice"
-    DISCUSSION = "discussion"
     SIMPLE = "simple"
+    MULTIPLE = "multiple"
+    FREE = "free"
 
 
 class Coordinates(BaseModel):

@@ -9,91 +9,117 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <div class="logo-section">
-                <h1 class="main-title">CONVOCATORIA DE REUNIÓN</h1>
-                <div class="meeting-info">
-                    <p class="meeting-id">ID: {{ meeting.id }}</p>
-                    <p class="community-id">Comunidad: {{ community.name }}</p>
-                </div>
-            </div>
-        </header>
-
-        <!-- Community Information -->
-        <section class="community-info">
-            <h2 class="section-title">INFORMACIÓN DE LA COMUNIDAD</h2>
-            <div class="community-details">
-                <div class="community-row">
-                    <strong>Nombre:</strong> {{ community.name }}
-                </div>
-                <div class="community-row">
-                    <strong>Nombre Legal:</strong> {{ community.legal_name }}
-                </div>
-                <div class="community-row">
-                    <strong>CIF:</strong> {{ community.cif }}
-                </div>
-                <div class="community-row">
-                    <strong>Dirección:</strong> {{ community.address }}
+            <div class="header-content">
+                <div class="community-info">
+                    <h1 class="community-name">{{ community.name }}</h1>
+                    <p class="community-legal">{{ community.legal_name }}</p>
+                    <p class="community-cif">CIF: {{ community.cif }}</p>
+                    <p class="community-address">{{ community.address }}</p>
                 </div>
                 {% if community.admin %}
-                <div class="admin-section">
+                <div class="admin-info">
                     <h3>Administrador</h3>
-                    <div class="admin-details">
-                        <div class="admin-row">
-                            <strong>Nombre:</strong> {{ community.admin.name }}
-                        </div>
-                        <div class="admin-row">
-                            <strong>Empresa:</strong> {{ community.admin.company }}
-                        </div>
-                        <div class="admin-row">
-                            <strong>CIF:</strong> {{ community.admin.cif }}
-                        </div>
-                        <div class="admin-row">
-                            <strong>Email:</strong> {{ community.admin.email }}
-                        </div>
-                        <div class="admin-row">
-                            <strong>Teléfono:</strong> {{ community.admin.phone }}
-                        </div>
-                    </div>
+                    <p><strong>{{ community.admin.name }}</strong></p>
+                    <p>{{ community.admin.company }}</p>
+                    <p>CIF: {{ community.admin.cif }}</p>
+                    <p>{{ community.admin.email }}</p>
+                    <p>{{ community.admin.phone }}</p>
                 </div>
                 {% endif %}
             </div>
-        </section>
+        </header>
 
-        <!-- Meeting Details -->
-        <section class="meeting-details">
-            <h2 class="section-title">{{ meeting.title }}</h2>
+        <!-- Main Title -->
+        <div class="main-title-section">
+            <h1 class="main-title">CONVOCATORIA DE JUNTA GENERAL DE PROPIETARIOS</h1>
+            <div class="meeting-info">
+                <p class="meeting-id">ID: {{ meeting.id }}</p>
+                <p class="meeting-date">Fecha: {{ meeting.date_time }}</p>
+            </div>
+        </div>
+
+        <!-- Meeting Details Section -->
+        <section class="meeting-details-section">
+            <h2 class="section-title">Convocatoria a Junta General {{ meeting.meeting_type|lower }}</h2>
             
-            <div class="legal-notice">
-                <p class="legal-text">
-                    <strong>A)</strong> De conformidad con lo establecido en el Art. 16.2 de la vigente Ley de Propiedad Horizontal, 
-                    se convoca <strong>{{ meeting.meeting_type }}</strong> en la C.P. <strong>{{ community.name }}</strong>, 
-                    que tendrá lugar el próximo día <strong class="highlight">{{ meeting.date_time }}</strong>, 
-                    {{ meeting.location_time }}, 
-                    en el <strong class="highlight">{{ meeting.location }}</strong>, 
-                    para tratar los siguientes puntos del orden del día:
-                </p>
-            </div>
+            <div class="meeting-info-card">
+                <div class="salutation">
+                    Estimado/a propietario/a:
+                </div>
+                
+                <div class="convocation-text">
+                    <p><strong>Por la presente, se le convoca a la Junta General {{ meeting.meeting_type|lower }} de esta comunidad, que tendrá lugar el próximo día {{ meeting.date_time }}, {{ meeting.location_time }}, en el {{ meeting.location }}.</strong></p>
+                </div>
 
-            <div class="description-section">
-                <h3>Descripción de la Reunión</h3>
-                <p>{{ meeting.description }}</p>
+                <div class="meeting-description">
+                    <p>{{ meeting.description }}</p>
+                </div>
+
+                <div class="important-notice">
+                    <p><strong>Se ruega puntual asistencia. En caso de no poder acudir, puede delegar su representación en otro propietario mediante autorización firmada.</strong></p>
+                </div>
+
+                <!-- Signature section -->
+                <section class="signature-section">
+                    <div class="signature-container">
+                        <div class="signature-fields">
+                            <div class="signature-field">
+                                <label>Fdo. El Presidente</label>
+                            </div>
+                            <div class="signature-field">
+                                <label>D. Juan García López</label>
+                            </div>
+                            <div class="signature-field">
+                                <label>Madrid, {{ meeting.date_time }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </section>
+
+        <!-- Table of Contents -->
+        <div class="toc-section">
+            <h2 class="toc-title">ÍNDICE</h2>
+            <div class="toc-list">
+                <div class="toc-item">
+                    <span class="toc-number">1.</span>
+                    <span class="toc-text">Información de la Reunión</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-number">2.</span>
+                    <span class="toc-text">Orden del Día</span>
+                </div>
+                {% if meeting.documents %}
+                <div class="toc-item">
+                    <span class="toc-number">3.</span>
+                    <span class="toc-text">Documentos Adjuntos</span>
+                </div>
+                {% endif %}
+                <div class="toc-item">
+                    <span class="toc-number">{% if meeting.documents %}4{% else %}3{% endif %}.</span>
+                    <span class="toc-text">Hoja de Votación</span>
+                </div>
+            </div>
+        </div>
 
         <!-- Page break for agenda -->
         <div class="page-break"></div>
 
-        <!-- Meeting Points -->
+        <!-- Meeting Points Section -->
         {% if meeting.meeting_points %}
         <section class="meeting-points-section">
-            <h3 class="section-title">ORDEN DEL DÍA</h3>
+            <h2 class="section-title">ORDEN DEL DÍA</h2>
             
             <div class="points-list">
                 {% for point in meeting.meeting_points %}
                 <div class="meeting-point">
-                    <div class="point-number">{{ loop.index }}.</div>
-                    <div class="point-content">
+                    <div class="point-header">
+                        <div class="point-number">{{ loop.index }}.</div>
                         <h4 class="point-title">{{ point.title }}</h4>
+                    </div>
+                    
+                    <div class="point-content">
                         <p class="point-description">{{ point.description }}</p>
                         
                         <!-- Point Documents -->
@@ -144,8 +170,10 @@
 
         <!-- Documents Section -->
         {% if meeting.documents %}
+        <div class="page-break"></div>
+        
         <section class="documents-section">
-            <h3 class="section-title">DOCUMENTOS ADJUNTOS</h3>
+            <h2 class="section-title">DOCUMENTOS ADJUNTOS</h2>
             <div class="documents-list">
                 {% for document in meeting.documents %}
                 <div class="document-item">
@@ -167,9 +195,12 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p class="generated-info">
-                Documento generado el {{ generated_at }}
-            </p>
+            <div class="footer-content">
+                <p class="generated-info">
+                    Documento generado el {{ generated_at }}
+                </p>
+                <p class="page-info">Página <span class="page-number"></span></p>
+            </div>
         </footer>
     </div>
 
@@ -179,11 +210,21 @@
     
     <div class="container voting-sheet">
         <header class="header">
-            <h1 class="main-title">HOJA DE VOTACIÓN</h1>
-            <div class="meeting-info">
-                <p class="meeting-id">ID: {{ meeting.id }} | Comunidad: {{ community.name }} | Fecha: {{ meeting.date_time }}</p>
+            <div class="header-content">
+                <div class="community-info">
+                    <h1 class="community-name">{{ community.name }}</h1>
+                    <p class="community-cif">CIF: {{ community.cif }}</p>
+                </div>
             </div>
         </header>
+
+        <div class="main-title-section">
+            <h1 class="main-title">HOJA DE VOTACIÓN</h1>
+            <div class="meeting-info">
+                <p class="meeting-id">ID: {{ meeting.id }}</p>
+                <p class="meeting-date">Fecha: {{ meeting.date_time }}</p>
+            </div>
+        </div>
 
         <section class="voting-section">
             <h2 class="section-title">PUNTOS A VOTAR</h2>
@@ -200,47 +241,36 @@
                 <div class="voting-options">
                     <h5>Tipo: {{ get_vote_type_text(point.voting.voteType) }}</h5>
                     
-                    {% if point.voting.voteType == "approval" %}
-                    <div class="approval-voting">
-                        <div class="vote-option">
-                            <span class="vote-circle" data-value="approve"></span>
-                            <label>APROBAR</label>
-                        </div>
-                        <div class="vote-option">
-                            <span class="vote-circle" data-value="reject"></span>
-                            <label>RECHAZAR</label>
-                        </div>
-                        <div class="vote-option">
-                            <span class="vote-circle" data-value="abstain"></span>
-                            <label>ABSTENERSE</label>
-                        </div>
-                    </div>
-                    
-                    {% elif point.voting.voteType == "multiple_choice" %}
-                    <div class="multiple-choice-voting">
-                        {% for option in point.voting.options %}
-                        <div class="vote-option">
-                            <span class="vote-circle" data-value="{{ option.id }}"></span>
-                            <label>{{ option.option }}</label>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    
-                    {% elif point.voting.voteType == "simple" %}
+                    {% if point.voting.voteType == "simple" %}
                     <div class="simple-voting">
                         {% for option in point.voting.options %}
                         <div class="vote-option">
-                            <span class="vote-circle" data-value="{{ option.id }}"></span>
+                            <div class="vote-checkbox">
+                                <div class="checkbox-circle"></div>
+                            </div>
                             <label>{{ option.option }}</label>
                         </div>
                         {% endfor %}
                     </div>
                     
-                    {% elif point.voting.voteType == "discussion" %}
-                    <div class="discussion-voting">
+                    {% elif point.voting.voteType == "multiple" %}
+                    <div class="multiple-voting">
+                        {% for option in point.voting.options %}
                         <div class="vote-option">
-                            <span class="vote-circle" data-value="discuss"></span>
-                            <label>REQUIERE DISCUSIÓN</label>
+                            <div class="vote-checkbox">
+                                <div class="checkbox-circle"></div>
+                            </div>
+                            <label>{{ option.option }}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    {% elif point.voting.voteType == "free" %}
+                    <div class="free-voting">
+                        <div class="free-text-input">
+                            <div class="input-field">
+                                <textarea placeholder="Escriba su respuesta aquí..." rows="4"></textarea>
+                            </div>
                         </div>
                     </div>
                     {% endif %}
@@ -249,7 +279,7 @@
             {% endfor %}
         </section>
 
-        <!-- Signature section at the end -->
+        <!-- Signature section -->
         <section class="signature-section">
             <h3>DATOS DEL PROPIETARIO</h3>
             <div class="signature-container">
@@ -275,11 +305,49 @@
         </section>
 
         <footer class="footer">
-            <p class="generated-info">
-                Hoja de votación generada el {{ generated_at }}
-            </p>
+            <div class="footer-content">
+                <p class="generated-info">
+                    Hoja de votación generada el {{ generated_at }}
+                </p>
+                <p class="page-info">Página <span class="page-number"></span></p>
+            </div>
         </footer>
     </div>
     {% endif %}
+
+    <!-- Representation Model - New Page -->
+    <div class="page-break"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="community-info">
+                    <h1 class="community-name">{{ community.name }}</h1>
+                    <p class="community-cif">CIF: {{ community.cif }}</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Representation section -->
+        <section class="representation-section">
+            <h3>Modelo de Representación</h3>
+            <div class="representation-form">
+                <p>Yo, D./D.ª ________________________________________, con DNI ____________, propietario/a de la vivienda/local nº _____ de la comunidad,</p>
+                <p><strong>delego mi representación</strong> en D./D.ª _______________________________________, con DNI ___________, para asistir y votar en mi nombre en la Junta General convocada para el día {{ meeting.date_time }}.</p>
+                <div class="signature-line">
+                    <p>Firma: ________________________</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <p class="generated-info">
+                    Modelo de representación generado el {{ generated_at }}
+                </p>
+                <p class="page-info">Página <span class="page-number"></span></p>
+            </div>
+        </footer>
+    </div>
 </body>
 </html> 

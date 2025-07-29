@@ -36,10 +36,9 @@ class PDFGenerator:
     def _format_location_time(self, timestamp: int) -> str:
         """Format timestamp for location and time in legal format"""
         dt = datetime.fromtimestamp(timestamp / 1000)  # Convert from milliseconds
-        # Add 30 minutes for second call
-        second_call = dt.replace(minute=dt.minute + 30)
-        if second_call.minute >= 60:
-            second_call = second_call.replace(hour=second_call.hour + 1, minute=second_call.minute - 60)
+        # Add 30 minutes for second call using timedelta for proper time arithmetic
+        from datetime import timedelta
+        second_call = dt + timedelta(minutes=30)
         
         return f"{dt.strftime('%H:%M')} horas en primera convocatoria, y a las {second_call.strftime('%H:%M')} horas en segunda convocatoria"
     
@@ -55,10 +54,9 @@ class PDFGenerator:
     def _get_vote_type_text(self, vote_type: str) -> str:
         """Get human readable text for vote type"""
         vote_types = {
-            "approval": "Aprobación",
-            "multiple_choice": "Opción múltiple",
-            "discussion": "Discusión",
-            "simple": "Simple"
+            "simple": "Simple",
+            "multiple": "Opción múltiple",
+            "free": "Texto libre"
         }
         return vote_types.get(vote_type, vote_type)
     
