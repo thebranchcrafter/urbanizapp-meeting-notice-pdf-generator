@@ -41,24 +41,24 @@ async def generate_meeting_notice_pdf(request: MeetingNoticeRequest):
         PDF file como respuesta HTTP
     """
     try:
-        logger.info(f"Generating PDF for meeting ID: {request.id}")
+        logger.info(f"Generating PDF for meeting ID: {request.meeting.id}")
         
         # Generate PDF
         pdf_bytes = pdf_generator.generate_meeting_notice_pdf(request)
         
-        logger.info(f"PDF generated successfully for meeting ID: {request.id}")
+        logger.info(f"PDF generated successfully for meeting ID: {request.meeting.id}")
         
         # Return PDF as response
         return Response(
             content=pdf_bytes,
             media_type="application/pdf",
             headers={
-                "Content-Disposition": f"attachment; filename=convocatoria_reunion_{request.id}.pdf"
+                "Content-Disposition": f"attachment; filename=convocatoria_reunion_{request.meeting.id}.pdf"
             }
         )
         
     except Exception as e:
-        logger.error(f"Error generating PDF for meeting ID {request.id}: {str(e)}")
+        logger.error(f"Error generating PDF for meeting ID {request.meeting.id}: {str(e)}")
         raise HTTPException(
             status_code=500,
             detail=f"Error generando el PDF: {str(e)}"

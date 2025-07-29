@@ -58,6 +58,80 @@ body {
     font-family: 'Segoe UI', 'Roboto', sans-serif;
 }
 
+/* Community Information Section */
+.community-info {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ecf0f1 100%);
+    border-radius: 8px;
+    border-left: 4px solid #27ae60;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.community-details {
+    margin-top: 12px;
+}
+
+.community-row {
+    display: flex;
+    margin-bottom: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.community-row:last-child {
+    border-bottom: none;
+}
+
+.community-row strong {
+    min-width: 100px;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+/* Admin Section */
+.admin-section {
+    margin-top: 15px;
+    padding: 12px;
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.admin-section h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #3498db;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.admin-details {
+    margin-top: 8px;
+}
+
+.admin-row {
+    display: flex;
+    margin-bottom: 6px;
+    padding: 4px 0;
+    font-size: 10px;
+    line-height: 1.3;
+}
+
+.admin-row strong {
+    min-width: 80px;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-right: 8px;
+}
+
 /* Legal notice section */
 .legal-notice {
     margin-bottom: 20px;
@@ -433,6 +507,15 @@ body {
 
 .multiple-choice-voting .vote-option:hover {
     border-left-color: #8e44ad;
+}
+
+/* Simple voting - modern list */
+.simple-voting .vote-option {
+    border-left: 2px solid #e74c3c;
+}
+
+.simple-voting .vote-option:hover {
+    border-left-color: #c0392b;
 }
 
 /* Discussion - modern checkbox */

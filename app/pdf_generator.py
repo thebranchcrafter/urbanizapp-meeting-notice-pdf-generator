@@ -25,17 +25,17 @@ class PDFGenerator:
     
     def _format_datetime(self, timestamp: int) -> str:
         """Convert Unix timestamp to formatted datetime string"""
-        dt = datetime.fromtimestamp(timestamp)
+        dt = datetime.fromtimestamp(timestamp / 1000)  # Convert from milliseconds
         return dt.strftime("%d de %B de %Y")
     
     def _format_time(self, timestamp: int) -> str:
         """Convert Unix timestamp to formatted time string"""
-        dt = datetime.fromtimestamp(timestamp)
+        dt = datetime.fromtimestamp(timestamp / 1000)  # Convert from milliseconds
         return dt.strftime("%H:%M")
     
     def _format_location_time(self, timestamp: int) -> str:
         """Format timestamp for location and time in legal format"""
-        dt = datetime.fromtimestamp(timestamp)
+        dt = datetime.fromtimestamp(timestamp / 1000)  # Convert from milliseconds
         # Add 30 minutes for second call
         second_call = dt.replace(minute=dt.minute + 30)
         if second_call.minute >= 60:
@@ -57,9 +57,18 @@ class PDFGenerator:
         vote_types = {
             "approval": "Aprobación",
             "multiple_choice": "Opción múltiple",
-            "discussion": "Discusión"
+            "discussion": "Discusión",
+            "simple": "Simple"
         }
         return vote_types.get(vote_type, vote_type)
+    
+    def _get_meeting_type_text(self, meeting_type: str) -> str:
+        """Get human readable text for meeting type"""
+        meeting_types = {
+            "ORDINARY": "ORDINARIA",
+            "EXTRAORDINARY": "EXTRAORDINARIA"
+        }
+        return meeting_types.get(meeting_type, meeting_type)
         
     def generate_meeting_notice_pdf(self, data: MeetingNoticeRequest) -> bytes:
         """
@@ -80,20 +89,27 @@ class PDFGenerator:
             
             # Prepare template context with properly formatted data
             context = {
+                'community': {
+                    'id': data.community.id,
+                    'name': data.community.name,
+                    'legal_name': data.community.legal_name,
+                    'cif': data.community.cif,
+                    'address': data.community.address,
+                    'coordinates': data.community.coordinates,
+                    'admin': data.community.admin
+                },
                 'meeting': {
-                    'id': data.id,
-                    'community_id': data.community_id,
-                    'title': data.title,
-                    'meeting_type': data.meeting_type,
-                    'date_time': self._format_datetime(data.date_time),
-                    'time': self._format_time(data.date_time),
-                    'location_time': self._format_location_time(data.date_time),
-                    'location': data.location,
-                    'description': data.description,
-                    'status': data.status,
-                    'documents': data.documents,
-                    'meeting_notice_file': data.meeting_notice_file,
-                    'meeting_points': data.meeting_points
+                    'id': data.meeting.id,
+                    'title': data.meeting.title,
+                    'meeting_type': self._get_meeting_type_text(data.meeting.meeting_type),
+                    'date_time': self._format_datetime(data.meeting.date_time),
+                    'time': self._format_time(data.meeting.date_time),
+                    'location_time': self._format_location_time(data.meeting.date_time),
+                    'location': data.meeting.location,
+                    'description': data.meeting.description,
+                    'status': data.meeting.status,
+                    'documents': data.meeting.documents,
+                    'meeting_points': data.meeting.meeting_points
                 },
                 'generated_at': datetime.now().strftime("%d/%m/%Y a las %H:%M horas"),
                 'format_file_size': self._format_file_size,

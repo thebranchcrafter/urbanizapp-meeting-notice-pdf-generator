@@ -8,6 +8,31 @@ class VoteType(str, Enum):
     APPROVAL = "approval"
     MULTIPLE_CHOICE = "multiple_choice"
     DISCUSSION = "discussion"
+    SIMPLE = "simple"
+
+
+class Coordinates(BaseModel):
+    Lat: float
+    Long: float
+
+
+class Admin(BaseModel):
+    cif: str
+    company: str
+    email: str
+    is_internal: bool
+    name: str
+    phone: str
+
+
+class Community(BaseModel):
+    address: str
+    admin: Optional[Admin] = None
+    cif: str
+    coordinates: Coordinates
+    id: str
+    legal_name: str
+    name: str
 
 
 class Document(BaseModel):
@@ -48,15 +73,18 @@ class MeetingNoticeFile(BaseModel):
     size: int
 
 
-class MeetingNoticeRequest(BaseModel):
+class Meeting(BaseModel):
     id: str
-    community_id: str
-    title: str
-    meeting_type: str
     date_time: int  # Unix timestamp
-    location: str
     description: str
-    status: int
     documents: List[Document] = []
-    meeting_notice_file: Optional[MeetingNoticeFile] = None
-    meeting_points: List[MeetingPoint] = [] 
+    location: str
+    meeting_points: List[MeetingPoint] = []
+    meeting_type: str  # ORDINARY or EXTRAORDINARY
+    status: int
+    title: str
+
+
+class MeetingNoticeRequest(BaseModel):
+    community: Community
+    meeting: Meeting 

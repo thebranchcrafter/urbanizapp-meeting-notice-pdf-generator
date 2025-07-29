@@ -42,11 +42,25 @@ def load_json_data(json_file: str) -> dict:
 
 def validate_data(data: dict) -> bool:
     """Basic validation of required fields"""
-    required_fields = ['id', 'community_id', 'title', 'meeting_type', 'date_time', 'location', 'description', 'status']
+    required_fields = ['community', 'meeting']
     
     for field in required_fields:
         if field not in data:
             logger.error(f"Missing required field: {field}")
+            return False
+    
+    # Validate community fields
+    community_fields = ['id', 'name', 'legal_name', 'cif', 'address', 'coordinates']
+    for field in community_fields:
+        if field not in data['community']:
+            logger.error(f"Missing required community field: {field}")
+            return False
+    
+    # Validate meeting fields
+    meeting_fields = ['id', 'title', 'meeting_type', 'date_time', 'location', 'description', 'status']
+    for field in meeting_fields:
+        if field not in data['meeting']:
+            logger.error(f"Missing required meeting field: {field}")
             return False
     
     return True
@@ -66,7 +80,7 @@ def generate_pdf_from_json(json_data: dict, output_file: str) -> bool:
         pdf_generator = PDFGenerator()
         
         # Generate PDF
-        logger.info(f"Generating PDF for meeting ID: {meeting_request.id}")
+        logger.info(f"Generating PDF for meeting ID: {meeting_request.meeting.id}")
         pdf_bytes = pdf_generator.generate_meeting_notice_pdf(meeting_request)
         
         # Write to output file
@@ -135,13 +149,13 @@ Examples:
         output_file = args.output
     elif args.output_dir:
         # Auto-generate filename based on meeting ID
-        meeting_id = json_data.get('id', 'unknown')
+        meeting_id = json_data.get('meeting', {}).get('id', 'unknown')
         output_dir = Path(args.output_dir)
         output_dir.mkdir(parents=True, exist_ok=True)
         output_file = output_dir / f"convocatoria_reunion_{meeting_id}.pdf"
     else:
         # Default output to current directory
-        meeting_id = json_data.get('id', 'unknown')
+        meeting_id = json_data.get('meeting', {}).get('id', 'unknown')
         output_file = f"convocatoria_reunion_{meeting_id}.pdf"
     
     # Generate PDF

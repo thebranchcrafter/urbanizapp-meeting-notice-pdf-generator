@@ -178,58 +178,79 @@ Genera un PDF de convocatoria de reunión.
 
 ```json
 {
-    "id": "01HXYZ123456789ABCDEF",
-    "community_id": "01HXYZ987654321FEDCBA",
-    "title": "Reunión ordinaria de la Comunidad",
-    "meeting_type": "ordinary",
-    "date_time": 1704067200,
-    "location": "Centro Comunitario Principal",
-    "description": "Reunión mensual para discutir temas importantes de la comunidad y planificar actividades futuras.",
-    "status": 1,
-    "documents": [
-        {
-            "id": "01HXYZ111111111111111",
-            "name": "agenda_reunion_enero.pdf",
-            "signed_url": "https://example-bucket.s3.amazonaws.com/documents/agenda_reunion_enero.pdf?signature=abc123",
-            "content_type": "application/pdf",
-            "size": 245760
-        }
-    ],
-    "meeting_notice_file": {
-        "id": "01HXYZ333333333333333",
-        "name": "convocatoria_reunion.pdf",
-        "signed_url": "https://example-bucket.s3.amazonaws.com/documents/convocatoria_reunion.pdf?signature=ghi789",
-        "content_type": "application/pdf",
-        "size": 156672
+    "community": {
+        "address": "Calle de Albarracín, 33, Madrid, España",
+        "admin": {
+            "cif": "B5423423432",
+            "company": "Seroanda",
+            "email": "ana.seroanda@test.com",
+            "is_internal": false,
+            "name": "Ana Pérez",
+            "phone": "+34333333333"
+        },
+        "cif": "B12345676",
+        "coordinates": {
+            "Lat": 40.432658,
+            "Long": -3.6310267
+        },
+        "id": "01K1C1TN9A7JNZP6YMNVWJCHQ1",
+        "legal_name": "Nombre legal comunidad",
+        "name": "Nombre comunidad"
     },
-    "meeting_points": [
-        {
-            "id": "01HXYZ444444444444444",
-            "meeting_id": "01HXYZ123456789ABCDEF",
-            "title": "Revisión del Presupuesto Anual",
-            "description": "Discutir y aprobar el presupuesto para el próximo año fiscal",
-            "documents": [],
-            "voting": {
-                "voteType": "approval",
-                "options": [
-                    {
-                        "id": "01HXYZ666666666666666",
-                        "option": "Aprobar",
-                        "order": 1
-                    },
-                    {
-                        "id": "01HXYZ777777777777777",
-                        "option": "Rechazar",
-                        "order": 2
-                    }
-                ]
-            },
-            "created_at": "2024-01-15T10:30:00Z",
-            "updated_at": "2024-01-15T10:30:00Z"
-        }
-    ]
+    "meeting": {
+        "date_time": 1753919400000,
+        "description": "Reunión ordinaria para tratar asuntos importantes de la comunidad",
+        "documents": [
+            {
+                "content_type": "application/pdf",
+                "id": "01K1C2MRH1XP8XEXH0TY2J8XKA",
+                "name": "es.aeat.dit.adu.eeca.catalogo.vis.pdf",
+                "signed_url": "",
+                "size": 220154
+            }
+        ],
+        "id": "01K1C2MRFPSEW1DGB4JB3XG7FB",
+        "location": "Salón de actos del edificio",
+        "meeting_points": [
+            {
+                "created_at": "2025-07-29T21:50:39Z",
+                "description": "Aprobación del presupuesto anual de la comunidad",
+                "documents": [],
+                "id": "01K1C2N1YRAH9WBTZQPNB4QEMH",
+                "meeting_id": "01K1C2MRFPSEW1DGB4JB3XG7FB",
+                "title": "Aprobación del presupuesto",
+                "updated_at": "2025-07-29T21:50:39Z",
+                "voting": {
+                    "options": [
+                        {
+                            "id": "yes",
+                            "option": "Sí",
+                            "order": 1
+                        },
+                        {
+                            "id": "no",
+                            "option": "No",
+                            "order": 2
+                        }
+                    ],
+                    "voteType": "simple"
+                }
+            }
+        ],
+        "meeting_type": "ORDINARY",
+        "status": 1,
+        "title": "Reunión Ordinaria de Propietarios"
+    }
 }
 ```
+
+**Notas importantes:**
+
+-   `date_time` debe ser un timestamp en milisegundos (no segundos)
+-   `meeting_type` puede ser `"ORDINARY"` o `"EXTRAORDINARY"`
+-   `voteType` puede ser `"approval"`, `"multiple_choice"`, `"discussion"`, o `"simple"`
+-   `admin` es opcional y puede ser `null`
+-   `coordinates` contiene la latitud y longitud de la comunidad
 
 **Respuesta:**
 
@@ -405,6 +426,17 @@ Si tienes problemas o preguntas:
 3. Abre un issue en el repositorio
 
 ## Changelog
+
+### v2.0.0
+
+-   ✅ Nueva estructura de datos con información completa de la comunidad
+-   ✅ Soporte para información del administrador (opcional)
+-   ✅ Coordenadas geográficas de la comunidad
+-   ✅ Nuevos tipos de votación: `simple`, `approval`, `multiple_choice`, `discussion`
+-   ✅ Tipos de reunión: `ORDINARY` y `EXTRAORDINARY`
+-   ✅ Timestamps en milisegundos
+-   ✅ Información del administrador incluida en el PDF
+-   ✅ Mejoras en el diseño del PDF con sección de información de la comunidad
 
 ### v1.1.0
 

@@ -1,0 +1,94 @@
+{
+  "community": {
+    "address": "Calle de Albarracín, 33, Madrid, España",
+    "admin": {
+      "cif": "B5423423432",
+      "company": "Seroanda",
+      "email": "ana.seroanda@test.com",
+      "is_internal": false,
+      "name": "Ana Pérez",
+      "phone": "+34333333333"
+    },
+    "cif": "B12345676",
+    "coordinates": {
+      "Lat": 40.432658,
+      "Long": -3.6310267
+    },
+    "id": "01K1C1TN9A7JNZP6YMNVWJCHQ1",
+    "legal_name": "Nombre legal comunidad",
+    "name": "Nombre comunidad"
+  },
+  "meeting": {
+    "date_time": 1753919400000,
+    "description": "Reunión ordinaria para tratar asuntos importantes de la comunidad",
+    "documents": [
+      {
+        "content_type": "application/pdf",
+        "id": "01K1C2MRH1XP8XEXH0TY2J8XKA",
+        "name": "es.aeat.dit.adu.eeca.catalogo.vis.pdf",
+        "signed_url": "",
+        "size": 220154
+      }
+    ],
+    "id": "01K1C2MRFPSEW1DGB4JB3XG7FB",
+    "location": "Salón de actos del edificio",
+    "meeting_points": [
+      {
+        "created_at": "2025-07-29T21:50:39Z",
+        "description": "Aprobación del presupuesto anual de la comunidad",
+        "documents": [],
+        "id": "01K1C2N1YRAH9WBTZQPNB4QEMH",
+        "meeting_id": "01K1C2MRFPSEW1DGB4JB3XG7FB",
+        "title": "Aprobación del presupuesto",
+        "updated_at": "2025-07-29T21:50:39Z",
+        "voting": {
+          "options": [
+            {
+              "id": "yes",
+              "option": "Sí",
+              "order": 1
+            },
+            {
+              "id": "no",
+              "option": "No",
+              "order": 2
+            }
+          ],
+          "voteType": "simple"
+        }
+      },
+      {
+        "created_at": "2025-07-29T21:50:39Z",
+        "description": "Renovación del contrato de mantenimiento",
+        "documents": [],
+        "id": "01K1C2N1YRAH9WBTZQPNB4QEMH2",
+        "meeting_id": "01K1C2MRFPSEW1DGB4JB3XG7FB",
+        "title": "Renovación de contratos",
+        "updated_at": "2025-07-29T21:50:39Z",
+        "voting": {
+          "options": [
+            {
+              "id": "approve",
+              "option": "Aprobar",
+              "order": 1
+            },
+            {
+              "id": "reject",
+              "option": "Rechazar",
+              "order": 2
+            },
+            {
+              "id": "abstain",
+              "option": "Abstenerse",
+              "order": 3
+            }
+          ],
+          "voteType": "approval"
+        }
+      }
+    ],
+    "meeting_type": "ORDINARY",
+    "status": 1,
+    "title": "Reunión Ordinaria de Propietarios"
+  }
+} 
