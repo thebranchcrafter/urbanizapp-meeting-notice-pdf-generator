@@ -65,7 +65,7 @@ async def generate_meeting_notice_pdf(request: MeetingNoticeRequest):
         )
 
 
-@app.get("/health")
+@app.api_route("/health", methods=["GET", "HEAD"])
 async def health_check():
     """Health check endpoint for monitoring"""
     return {
