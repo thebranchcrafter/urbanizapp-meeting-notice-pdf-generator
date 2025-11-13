@@ -1,3 +1,9 @@
+/* Page setup for PDF */
+@page {
+    size: A4;
+    margin: 2cm 2cm 3cm 2cm;
+}
+
 /* Reset and base styles */
 * {
     margin: 0;
@@ -17,13 +23,72 @@ body {
     max-width: 800px;
     margin: 0 auto;
     padding: 25px;
+    padding-bottom: 50px; /* Space for fixed footer */
 }
 
 /* Header */
 .header {
-    border-bottom: 2px solid #34495e;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    padding: 20px 0;
+    border-bottom: 2px solid #2c3e50;
+}
+
+.header-top {
+    margin-bottom: 15px;
+}
+
+.header-title-section {
+    text-align: center;
+    position: relative;
+}
+
+.main-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #2c3e50;
+    line-height: 1.3;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.title-underline {
+    width: 100px;
+    height: 2px;
+    background: #2c3e50;
+    margin: 10px auto 0;
+}
+
+.header-info {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e9ecef;
+}
+
+.info-item {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 6px;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.info-item:last-child {
+    margin-bottom: 0;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #34495e;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.info-value {
+    color: #2c3e50;
+    word-break: break-word;
 }
 
 .header-content {
@@ -107,15 +172,7 @@ body {
     box-shadow: 0 2px 8px rgba(52, 152, 219, 0.1);
 }
 
-.main-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    line-height: 1.2;
-    color: #2c3e50;
-}
+/* Main title styles are now in header section above */
 
 .meeting-info {
     display: flex;
@@ -137,6 +194,23 @@ body {
 /* Meeting Details Section */
 .meeting-details-section {
     margin-bottom: 20px;
+}
+
+.description-section {
+    margin-top: 20px;
+}
+
+.description-section h3 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.description-section p {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #2c3e50;
 }
 
 .meeting-info-card {
@@ -506,9 +580,16 @@ body {
 
 /* Footer */
 .footer {
-    margin-top: 20px;
-    padding-top: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 0;
     border-top: 1px solid #ecf0f1;
+    background: #fff;
+    font-size: 9px;
+    text-align: center;
+    width: 100%;
 }
 
 .footer-content {
@@ -664,8 +745,77 @@ body {
     margin-top: 20px;
 }
 
+.voting-sheet-container {
+    padding-bottom: 50px; /* Space for fixed footer */
+}
+
 .voting-section {
     margin-bottom: 20px;
+}
+
+/* Owner Data Section */
+.owner-data-section {
+    margin-top: 40px;
+    padding: 20px;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.owner-data-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #2c3e50;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #2c3e50;
+}
+
+.owner-data-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.owner-field {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.owner-field label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #34495e;
+    min-width: 140px;
+    flex-shrink: 0;
+}
+
+.field-line {
+    flex: 1;
+    height: 20px;
+    border-bottom: 2px solid #2c3e50;
+    min-width: 200px;
+}
+
+.owner-field.signature-field {
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+}
+
+.signature-line {
+    flex: 1;
+    height: 60px;
+    border: 1px solid #2c3e50;
+    border-radius: 4px;
+    min-width: 200px;
+    background: #fafafa;
 }
 
 .voting-point {
@@ -676,6 +826,56 @@ body {
     page-break-inside: avoid;
     background: #fff;
     box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+/* Vote Delegation Section */
+.delegation-container {
+    padding-bottom: 50px; /* Space for fixed footer */
+}
+
+.delegation-title-simple {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    color: #2c3e50;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #2c3e50;
+}
+
+.delegation-text {
+    font-size: 12px;
+    line-height: 1.8;
+    color: #2c3e50;
+    text-align: justify;
+}
+
+.delegation-text p {
+    margin-bottom: 15px;
+}
+
+.delegation-line {
+    display: inline-block;
+    margin: 0 1px;
+    color: #2c3e50;
+    text-decoration: none;
+    border: none;
+    letter-spacing: 0.5px;
+    font-family: 'Courier New', monospace;
+}
+
+.delegation-line-long {
+    min-width: 280px;
+}
+
+.delegation-line-medium {
+    min-width: 140px;
+}
+
+.delegation-line-short {
+    min-width: 60px;
 }
 
 .point-header {
@@ -912,6 +1112,22 @@ body {
         max-width: none;
         margin: 0;
         padding: 15px;
+        padding-bottom: 40px; /* Space for fixed footer */
+    }
+    
+    .voting-sheet-container {
+        padding-bottom: 40px; /* Space for fixed footer */
+    }
+    
+    .delegation-container {
+        padding-bottom: 40px; /* Space for fixed footer */
+    }
+    
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
     }
     
     .header {

@@ -6,8 +6,11 @@ from enum import Enum
 
 class VoteType(str, Enum):
     SIMPLE = "simple"
+    APPROVAL = "approval"
     MULTIPLE = "multiple"
+    MULTIPLE_CHOICE = "multiple_choice"
     FREE = "free"
+    DISCUSSION = "discussion"
 
 
 class Coordinates(BaseModel):
@@ -19,7 +22,6 @@ class Admin(BaseModel):
     cif: str
     company: str
     email: str
-    is_internal: bool
     name: str
     phone: str
 
@@ -30,7 +32,6 @@ class Community(BaseModel):
     cif: str
     coordinates: Coordinates
     id: str
-    legal_name: str
     name: str
 
 
@@ -49,7 +50,8 @@ class VotingOption(BaseModel):
 
 
 class Voting(BaseModel):
-    voteType: VoteType
+    vote_type: VoteType
+    majority_type: Optional[str] = None
     options: List[VotingOption] = []
 
 

@@ -55,10 +55,45 @@ class PDFGenerator:
         """Get human readable text for vote type"""
         vote_types = {
             "simple": "Simple",
+            "approval": "Aprobación",
             "multiple": "Opción múltiple",
-            "free": "Texto libre"
+            "multiple_choice": "Opción múltiple",
+            "free": "Texto libre",
+            "discussion": "Discusión"
         }
         return vote_types.get(vote_type, vote_type)
+    
+    def _get_majority_type_text(self, majority_type: str) -> str:
+        """Get human readable text for majority type"""
+        majority_types = {
+            "simple_attendees": "Mayoría simple de asistentes",
+            "absolute_attendees": "Mayoría absoluta de asistentes",
+            "simple_quorum": "Mayoría simple del quórum",
+            "absolute_quorum": "Mayoría absoluta del quórum",
+            "qualified": "Mayoría cualificada"
+        }
+        return majority_types.get(majority_type, majority_type)
+    
+    def _get_location_with_article(self, location: str) -> str:
+        """Add appropriate article (el/la) to location"""
+        if not location:
+            return ""
+        location_lower = location.lower().strip()
+        # Common patterns that use "la"
+        la_patterns = ["sala", "casa", "oficina", "residencia", "plaza", "calle"]
+        # Common patterns that use "el"
+        el_patterns = ["edificio", "local", "salón", "centro", "pabellón"]
+        
+        # Check if location starts with any of these patterns
+        for pattern in la_patterns:
+            if location_lower.startswith(pattern):
+                return f"la {location}"
+        for pattern in el_patterns:
+            if location_lower.startswith(pattern):
+                return f"el {location}"
+        
+        # Default to "el" if unsure
+        return f"el {location}"
     
     def _get_meeting_type_text(self, meeting_type: str) -> str:
         """Get human readable text for meeting type"""
@@ -90,7 +125,7 @@ class PDFGenerator:
                 'community': {
                     'id': data.community.id,
                     'name': data.community.name,
-                    'legal_name': data.community.legal_name,
+                    'legal_name': getattr(data.community, 'legal_name', None),
                     'cif': data.community.cif,
                     'address': data.community.address,
                     'coordinates': data.community.coordinates,
@@ -99,11 +134,14 @@ class PDFGenerator:
                 'meeting': {
                     'id': data.meeting.id,
                     'title': data.meeting.title,
+                    'community_name': data.community.name,
                     'meeting_type': self._get_meeting_type_text(data.meeting.meeting_type),
+                    'meeting_type_translated': self._get_meeting_type_text(data.meeting.meeting_type).lower(),
                     'date_time': self._format_datetime(data.meeting.date_time),
                     'time': self._format_time(data.meeting.date_time),
                     'location_time': self._format_location_time(data.meeting.date_time),
                     'location': data.meeting.location,
+                    'location_with_article': self._get_location_with_article(data.meeting.location),
                     'description': data.meeting.description,
                     'status': data.meeting.status,
                     'documents': data.meeting.documents,
@@ -111,7 +149,8 @@ class PDFGenerator:
                 },
                 'generated_at': datetime.now().strftime("%d/%m/%Y a las %H:%M horas"),
                 'format_file_size': self._format_file_size,
-                'get_vote_type_text': self._get_vote_type_text
+                'get_vote_type_text': self._get_vote_type_text,
+                'get_majority_type_text': self._get_majority_type_text
             }
             
             # Render HTML with template
